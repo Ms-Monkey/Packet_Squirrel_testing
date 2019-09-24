@@ -7,11 +7,18 @@ from pcapfile import savefile
 
 def main(file):
     testcap = open(file, 'rb')
-    pcap = savefile.load_savefile(testcap, verbose=True)
+    pcap = savefile.load_savefile(testcap, layers=2, verbose=True)
+
+    print(pcap.packets[0].packet.__dict__)
+    print(pcap.packets[0].packet.src)
+    print(pcap.packets[0].packet.dst)
+    exit()
 
     counter = 0
-    exit()
     for packet in pcap.packets:
+        print(type(packet))
+        if type(packet) == 'str':
+            continue
         print(type(packet))
         if counter > 10:
             exit()
